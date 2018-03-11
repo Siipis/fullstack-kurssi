@@ -1,6 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
+import { Glyphicon, Table, Nav, NavItem, Button } from 'react-bootstrap'
+
 import Notification from './components/Notification'
 import Togglable from './components/Togglable'
 import LoginForm from './components/LoginForm'
@@ -172,7 +174,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='container'>
         {this.state.error === null ?
           <div></div> :
           <Notification message={this.state.error} />
@@ -190,12 +192,22 @@ class App extends React.Component {
           <div>
             <Router>
               <div>
-                <div>
-                  <Link to='/'>blogs </Link>
-                  <Link to='/users'>users </Link>
+                <div className='well clearfix' style={{ marginTop: 20 }}>
+                  <Nav bsStyle='pills pull-left'>
+                    <NavItem>
+                      <Link to='/'>blogs </Link>
+                    </NavItem>
+                    <NavItem>
+                      <Link to='/users'>users </Link>
+                    </NavItem>
+                  </Nav>
 
-                  {this.state.user.name} logged in
-                  <button onClick={this.logout}>logout</button>
+                  <div className='pull-right'>
+                      <span style={{ lineHeight: '18px', marginRight: 5 }}>{this.state.user.name} logged in</span>
+                      <Button onClick={this.logout}>
+                        <Glyphicon glyph='off' />
+                      </Button>
+                  </div>
                 </div>
 
                 <Route exact path="/" render={() =>
@@ -211,9 +223,13 @@ class App extends React.Component {
                     </Togglable>
 
                     <h2>blogs</h2>
-                    {this.state.blogs.sort((a, b) => a.likes <= b.likes).map(blog =>
-                      <Blog key={blog._id} blog={blog} />
-                    )}
+                      <Table striped hover>
+                      <tbody>
+                        {this.state.blogs.sort((a, b) => a.likes <= b.likes).map(blog =>
+                          <Blog key={blog._id} blog={blog} />
+                        )}
+                      </tbody>
+                    </Table>
                   </div>
                 } />
 

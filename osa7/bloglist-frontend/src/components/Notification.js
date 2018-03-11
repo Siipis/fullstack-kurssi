@@ -1,8 +1,10 @@
 import React from 'react'
+import { Alert } from 'react-bootstrap'
+
 const Notification = ({ message }) => (
-  <div style={{ color: 'teal', fontWeight: 'bold', padding: 10, border: '1px solid teal', marginBottom: 20 }}>
+  <Alert bsStyle='info'>
     {message}
-  </div>
+  </Alert>
 )
 
 export default Notification

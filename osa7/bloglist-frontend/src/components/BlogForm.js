@@ -1,39 +1,40 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap'
 
 const BlogForm = ({ handleSubmit, handleChange, title, author, url }) => (
   <div>
     <h2>create new</h2>
 
     <form onSubmit={handleSubmit}>
-      <div>
-        title:
-        <input
+      <FormGroup controlId='title'>
+        <ControlLabel>title:</ControlLabel>
+        <FormControl
           type="text"
           name="title"
           value={title}
           onChange={handleChange}
         />
-      </div>
-      <div>
-        author:
-        <input
+      </FormGroup>
+      <FormGroup>
+        <ControlLabel>author:</ControlLabel>
+        <FormControl
           type="text"
           name="author"
           value={author}
           onChange={handleChange}
         />
-      </div>
-      <div>
-        url:
-        <input
+      </FormGroup>
+      <FormGroup>
+        <ControlLabel>url:</ControlLabel>
+        <FormControl
           type="text"
           name="url"
           value={url}
           onChange={handleChange}
         />
-      </div>
-      <button type="submit">create</button>
+      </FormGroup>
+      <Button bsStyle='success' type="submit">create</Button>
     </form>
   </div>
 )

@@ -1,4 +1,5 @@
 import React from 'react'
+import { FormGroup, FormControl, InputGroup, Button, Glyphicon, Well } from 'react-bootstrap'
 
 const BlogInfo = ({ handleSubmit, handleUpdate, handleDelete, blog, isOwnBlog }) => (
   <div>
@@ -7,23 +8,34 @@ const BlogInfo = ({ handleSubmit, handleUpdate, handleDelete, blog, isOwnBlog })
       <a href={blog.url} target="_blank">{blog.url}</a>
     </p>
     <div>
-      {blog.likes} likes
-      <button onClick={handleUpdate}>like</button>
+      <span style={{ fontSize: '120%', lineHeight: '14px', marginRight: 10 }}>
+        {blog.likes} likes
+      </span>
+      <Button bsStyle='success' onClick={handleUpdate}>
+        <Glyphicon glyph='thumbs-up' />
+      </Button>
     </div>
-    <p>added by {blog.user === undefined ? 'unknown' : blog.user.name}</p>
+
+    <div style={{ marginTop: 20, marginBottom: 20 }}>
+      added by {blog.user === undefined ? 'unknown' : blog.user.name}
+    </div>
 
     {isOwnBlog ?
-      <button onClick={handleDelete}>delete</button> : ''
+      <Button bsStyle='danger' onClick={handleDelete}>delete</Button> : ''
     }
 
     <h2>comments</h2>
-    <ul>
-      { blog.comments === undefined ? '' : blog.comments.map((comment, i) => <li key={i}>{comment}</li>) }
-    </ul>
+    { blog.comments === undefined ? '' : blog.comments.map((comment, i) => <Well key={i}>{comment}</Well>) }
 
-    <form onSubmit={handleSubmit}>
-      <input name='comment' />
-      <button>add comment</button>
+    <form onSubmit={handleSubmit} className='col-xs-6'>
+      <FormGroup>
+        <InputGroup>
+          <FormControl name='comment' />
+          <InputGroup.Button>
+            <Button bsStyle='info'>add comment</Button>
+          </InputGroup.Button>
+        </InputGroup>
+      </FormGroup>
     </form>
   </div>
 )
